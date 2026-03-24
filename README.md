@@ -12,22 +12,43 @@
 - [Contact](#contact)
 
 ## Project Overview
-This project automates work order management by integrating Asana and Google Drive APIs. It streamlines task creation, updates, and organization, ensuring efficient workflows at FX Industries.
+
+This system is a deployed work order orchestration pipeline built for FX Industries.
+
+It monitors workflow state inside Asana, transforms structured task data into production-ready work orders, generates documents in Google Sheets, exports them as PDFs, and sends them to physical printers.
+
+The system was used in a live production environment and integrates multiple services into a single automated flow without requiring users to change how they work.
 
 ## Key Features
 
-### 1. Asana Integration
-- Fetches tasks from Asana's `QUOTED JOBS` section.
-- Updates and moves tasks between stages (`Staging` to `QUOTED JOBS`).
+### 1. Workflow State Detection (Asana)
+- Monitors the QUOTED JOBS section in real time
+- Detects new and re-entered tasks
+- Tracks task lifecycle (active vs exited)
 
-### 2. Google Drive Integration
-- Locates and duplicates work order templates.
-- Populates templates with task data, pulls new work order numbers, and organizes files into folders based on client name and date.
-- Automatically generates and prints new work orders.
+### 2. Structured Data Mapping
+- Maps Asana custom fields (GIDs) directly to work order template cells
+- Supports multi-line structured data (QDMPT tables)
 
-### 3. Security
-- `.env` file securely stores API keys.
-- Sensitive files are excluded from version control via `.gitignore`.
+### 3. Document Generation (Google Drive & Sheets)
+- Automatically creates Year/Month folder structure
+- Duplicates a master work order template
+- Populates all fields dynamically from task data
+- Maintains sequential work order numbering
+
+### 4. PDF Export & Print Automation
+- Exports completed work orders as PDFs
+- Sends jobs directly to system printer
+- Monitors print queue to verify completion
+- Includes retry and fail-safe logic
+
+### 5. Closed-Loop Synchronization
+- Writes the assigned work order number back to Asana
+- Keeps task and document state aligned
+
+### 6. Real-World Deployment
+- Used in production at FX Industries
+- Designed to operate alongside existing workflows (no user retraining required)
 
 ## Prerequisites
 
