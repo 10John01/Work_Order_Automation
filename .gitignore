@@ -1,0 +1,40 @@
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# Environment files
+.env
+config/.env
+
+# Secrets / credentials
+config/*token*
+config/*secret*
+config/*key*
+config/asana_token.json
+config/client_secret_*.json
+config/work_order_automation_key*.json
+
+# Local state (do NOT expose)
+config/exited_jobs.json
+config/metadata.json
+config/processed_tasks.json
+config/quoted_jobs.json
+config/removed_tasks.json
+config/work_order_tracker.json
+
+# Output / temp
+Printed_Files/
+*.log
+
+# Optional (you chose this earlier)
+tests/
