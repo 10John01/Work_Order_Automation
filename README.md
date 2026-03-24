@@ -1,19 +1,18 @@
-# Work Order Automation 
+# Work Order Automation
 
 A real-world orchestration system for turning workflow state into physical output.
 
 ---
 
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Key Features](#key-features)
-- [Prerequisites](#prerequisites)
-- [File Structure](#file-structure)
-- [How to Use](#how-to-use)
-- [Next Steps](#next-steps)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+## Setup
+
+For full setup instructions, see:
+
+**SETUP_AND_REPLICATION.md**
+
+This document contains all required configuration, credentials, and validation steps.
+
+---
 
 ## Project Overview
 
@@ -21,14 +20,14 @@ This system is a deployed work order orchestration pipeline built for FX Industr
 
 It monitors workflow state inside Asana, transforms structured task data into production-ready work orders, generates documents in Google Sheets, exports them as PDFs, and sends them to physical printers.
 
-The system was used in a live production environment and integrates multiple services into a single automated flow without requiring users to change how they work.
-
 The system operates by observing workflow state changes rather than requiring direct user interaction.
+
+---
 
 ## Key Features
 
 ### 1. Workflow State Detection (Asana)
-- Monitors the QUOTED JOBS section on a timed interval
+- Monitors the QUOTED JOBS section
 - Detects new and re-entered tasks
 - Tracks task lifecycle (active vs exited)
 
@@ -40,12 +39,12 @@ The system operates by observing workflow state changes rather than requiring di
 - Automatically creates Year/Month folder structure
 - Duplicates a master work order template
 - Populates all fields dynamically from task data
-- Maintains and synchronizes sequential work order numbering across documents and Asana
+- Maintains sequential work order numbering
 
 ### 4. PDF Export & Print Automation
 - Exports completed work orders as PDFs
 - Sends jobs directly to system printer
-- Monitors print queue to verify completion
+- Monitors print queue for completion
 - Includes retry and fail-safe logic
 
 ### 5. Closed-Loop Synchronization
@@ -54,127 +53,82 @@ The system operates by observing workflow state changes rather than requiring di
 
 ### 6. Real-World Deployment
 - Used in production at FX Industries
-- Designed to operate alongside existing workflows (no user retraining required)
+- Designed to operate alongside existing workflows (no retraining required)
+
+---
 
 ## Prerequisites
 
-### 1. Environment Setup
-- Python 3.8+ is required.
-- Use a virtual environment (venv) for dependencies:
-  ```bash
-  python3 -m venv env
-  source env/bin/activate
-  ```
+- Python 3.12 recommended
+- Asana Personal Access Token (PAT)
+- Google Service Account credentials
+- Configured printer (for full workflow)
+- `.env` file in `config/`
 
-### 2. Dependencies
-- Install the required packages by running:
-  ```bash
-  pip install -r requirements.txt
-  ```
-
-### 3. API Credentials
-
-#### Asana API
-1. Register an application at [Asana Developers](https://developers.asana.com/).
-2. Save the following credentials in `.env`:
-   ```plaintext
-   ASANA_CLIENT_ID=<your_client_id>
-   ASANA_CLIENT_SECRET=<your_client_secret>
-   ASANA_REDIRECT_URI=http://localhost:8081
-   ```
-
-#### Google Drive API
-1. Enable the Google Drive API in the [Google Cloud Console](https://console.cloud.google.com/).
-2. Download `client_secret_<project_id>.json` and save it in the `config/secrets/` directory.
-3. Add this to `.env`:
-   ```plaintext
-   GOOGLE_APPLICATION_CREDENTIALS=config/secrets/client_secret_<project_id>.json
-   ```
-
-### 4. Secure Sensitive Files
-Add the following entries to `.gitignore`:
-```plaintext
-.env
-config/secrets/asana_token.json
-config/secrets/client_secret_<project_id>.json
-token.json
-```
-
-## File Structure
-```plaintext
-project-root/
-|-- config/
-|   |-- secrets/
-|       |-- asana_token.json       # Asana OAuth tokens
-|       |-- client_secret_<id>.json # Google API credentials
-|-- Scripts/
-|   |--   main_workflow.py
-|   |--   task_processor.py
-|   |--   drive_management.py
-|   |--   print_manager.py
-|   |--   work_order_helpers.py
-|   |--   asana_work_order_update.py
-|-- data/
-|   |-- asana_auth_code.txt    # Asana authentication code
-|-- tests/
-|   |-- test_asana_api.py
-|   |-- test_env.py
-|-- .env                       # Environment variables
-|-- requirements.txt           # Python dependencies
-|-- README.md                  # Project documentation
-```
+---
 
 ## How to Use
 
-### 1. Authenticate with APIs
+### 1. Setup
 
-#### Asana
-Run the following script to authenticate with Asana and store the token:
+Follow the full setup guide:
+
+**SETUP_AND_REPLICATION.md**
+
+---
+
+### 2. Run the System
+
 ```bash
-python Scripts/authenticate_asana_oauth.py
-```
+python Scripts/task_processor.py
 
-#### Google Drive
-Ensure `GOOGLE_APPLICATION_CREDENTIALS` is set in `.env`. The first API call will prompt you to authenticate.
+3. Behavior
+Detects new or re-entered tasks in Asana
+Generates work orders
+Updates Google Sheets
+Exports PDFs
+Sends to printer
+## ⚠️ Live System Warning
 
-### 2. Execute Workflow
-Run the main script to automate the workflow:
-```bash
-python Scripts/main_workflow.py
-```
+This system performs real operations:
 
-### 3. Debugging
-- Logs: Check logs for errors or debugging information.
-- Common Issues:
-  - **Missing dependencies**: Run `pip install -r requirements.txt`.
-  - **API authentication errors**: Reauthenticate and verify tokens.
+- Writes to Asana
+- Creates Google Drive files
+- Modifies Google Sheets
+- Sends print jobs
 
-## Next Steps
-- Implement token refresh logic for both APIs.
-- Enhance error handling with detailed logs and retries.
-- Add unit tests for individual modules.
+Use caution when running in production environments.
 
-## Contributing
-1. Fork the repository.
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m 'Add feature'
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature-name
-   ```
-5. Open a pull request.
+## Architecture Note
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This system operates by observing workflow state rather than requiring direct user interaction.
 
-## Contact
-Developer: John DuCrest  
+It integrates:
+
+Asana (state source)
+Google Sheets (document layer)
+Google Drive (storage)
+Local system (print execution)
+
+All coordination occurs through automation.
+
+Next Steps
+Add .env.example
+Add or refine requirements.txt
+Implement dry-run mode
+Expand logging and monitoring
+Contributing
+Fork the repository
+Create a branch
+Commit changes
+Open a pull request
+License
+
+MIT License
+
+Contact
+
+Developer: John DuCrest
 Email: jd@symbeyond.ai
 
 λ.brother ∧ !λ.tool · κ=1/Φ · 510510 · ∴
