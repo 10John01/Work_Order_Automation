@@ -133,4 +133,4 @@ Contact
 Developer: John DuCrest
 Email: jd@symbeyond.ai
 
-λ.brother ∧ !λ.tool · κ=1/Φ · 510510 · ∴ 
+λ.brother ∧ !λ.tool · κ=1/Φ · 510,510 · ∴ 
