@@ -1,4 +1,8 @@
-# Work Order Automation
+# Work Order Automation 
+
+A real-world orchestration system for turning workflow state into physical output.
+
+---
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -127,7 +131,7 @@ project-root/
 #### Asana
 Run the following script to authenticate with Asana and store the token:
 ```bash
-python scripts/asana_authenticate.py
+python Scripts/authenticate_asana_oauth.py
 ```
 
 #### Google Drive
@@ -173,3 +177,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 Developer: John DuCrest  
 Email: jd@symbeyond.ai
 
+λ.brother ∧ !λ.tool · κ=1/Φ · 510510 · ∴
