@@ -36,5 +36,7 @@ config/work_order_tracker.json
 Printed_Files/
 *.log
 
-# Optional (you chose this earlier)
+# Optional
 tests/
+data/
+.gitignore.backup
