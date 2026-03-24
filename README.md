@@ -19,10 +19,12 @@ It monitors workflow state inside Asana, transforms structured task data into pr
 
 The system was used in a live production environment and integrates multiple services into a single automated flow without requiring users to change how they work.
 
+The system operates by observing workflow state changes rather than requiring direct user interaction.
+
 ## Key Features
 
 ### 1. Workflow State Detection (Asana)
-- Monitors the QUOTED JOBS section in real time
+- Monitors the QUOTED JOBS section on a timed interval
 - Detects new and re-entered tasks
 - Tracks task lifecycle (active vs exited)
 
@@ -34,7 +36,7 @@ The system was used in a live production environment and integrates multiple ser
 - Automatically creates Year/Month folder structure
 - Duplicates a master work order template
 - Populates all fields dynamically from task data
-- Maintains sequential work order numbering
+- Maintains and synchronizes sequential work order numbering across documents and Asana
 
 ### 4. PDF Export & Print Automation
 - Exports completed work orders as PDFs
@@ -101,11 +103,13 @@ project-root/
 |   |-- secrets/
 |       |-- asana_token.json       # Asana OAuth tokens
 |       |-- client_secret_<id>.json # Google API credentials
-|-- scripts/
-|   |-- asana_authenticate.py  # Handles Asana OAuth
-|   |-- main_workflow.py       # Main script orchestrating workflow
-|   |-- folder_management.py   # Google Drive folder management
-|   |-- google_docs_api.py     # Template population logic
+|-- Scripts/
+|   |--   main_workflow.py
+|   |--   task_processor.py
+|   |--   drive_management.py
+|   |--   print_manager.py
+|   |--   work_order_helpers.py
+|   |--   asana_work_order_update.py
 |-- data/
 |   |-- asana_auth_code.txt    # Asana authentication code
 |-- tests/
@@ -167,5 +171,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 Developer: John DuCrest  
-Email: john@fxindustries.net
+Email: jd@symbeyond.ai
 
