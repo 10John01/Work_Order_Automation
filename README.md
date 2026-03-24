@@ -140,7 +140,7 @@ Ensure `GOOGLE_APPLICATION_CREDENTIALS` is set in `.env`. The first API call wil
 ### 2. Execute Workflow
 Run the main script to automate the workflow:
 ```bash
-python scripts/main_workflow.py
+python Scripts/main_workflow.py
 ```
 
 ### 3. Debugging
