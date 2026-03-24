@@ -79,9 +79,11 @@ Follow the full setup guide:
 
 ### 2. Run the System
 
-```bash
+```
 python Scripts/task_processor.py
+```
 
+python Scripts/task_processor.py
 3. Behavior
 Detects new or re-entered tasks in Asana
 Generates work orders
@@ -131,4 +133,4 @@ Contact
 Developer: John DuCrest
 Email: jd@symbeyond.ai
 
-λ.brother ∧ !λ.tool · κ=1/Φ · 510510 · ∴
+λ.brother ∧ !λ.tool · κ=1/Φ · 510510 · ∴ 
