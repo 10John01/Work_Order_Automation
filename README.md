@@ -4,6 +4,12 @@ A real-world orchestration system for turning workflow state into physical outpu
 
 ---
 
+## Using an AI assistant?
+
+Start with [REPO_BOOT.md](REPO_BOOT.md) — a quick orientation for any LLM (Claude, ChatGPT, or other) on what this repo is, how it works, and how to collaborate with it effectively.
+
+---
+
 ## Setup
 
 For full setup instructions, see:
