@@ -8,6 +8,16 @@ A real-world orchestration system for turning workflow state into physical outpu
 
 Start with [REPO_BOOT.md](REPO_BOOT.md) — a quick orientation for any LLM (Claude, ChatGPT, or other) on what this repo is, how it works, and how to collaborate with it effectively.
 
+## What This Repository Contains
+
+| File / Folder | Purpose |
+|---|---|
+| `Scripts/task_processor.py` | Main orchestration entry point |
+| `SETUP_AND_REPLICATION.md` | Full setup, credentials, validation steps |
+| `projects/` | Per-project configuration |
+| `tasks/` | Task-state tracking |
+| `requirements.txt` | Python dependencies |
+
 ---
 
 ## Setup
